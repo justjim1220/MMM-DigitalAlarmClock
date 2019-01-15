@@ -24,6 +24,23 @@
  *
  * Licensed with a crapload of good ole' Southern Sweet Tea
  * and a lot of Cheyenne Extreme Menthol cigars!!!
+ * 
+ * 	<button onclick="enableMute()" type="button">Disable Alarm</button>
+ *	<button onclick="disableMute()" type="button">Enable Alarm</button>	
+ * 	
+ *	var aud = document.getElementById("myAudio");
+ *
+ *	function enableMute() { 
+ * 		aud.muted = true;
+ *	} 
+ *
+ *	function disableMute() { 
+ *  	aud.muted = false;
+ *	} 
+ *
+ *	<button data-audio-src="modules/MMM-DigitalAlarmClock/sounds/alarm.mp3" class=>"button"
+ *	<img src="modules/MMM-DigitalAlarmClock/posters/bell-regular.svg" width="75" height="42"></button>
+ * 
  */
 
 Module.register("MMM-DigitalAlarmClock", {
@@ -31,6 +48,7 @@ Module.register("MMM-DigitalAlarmClock", {
 	alarmFired: false,
 	timer: null,
 	fadeInterval: null,
+
 	defaults: {
 		timeFormat: config.timeFormat,
 		showDate: true,
@@ -38,15 +56,14 @@ Module.register("MMM-DigitalAlarmClock", {
 		dateFormat: "ddd ll",
 		timezone: "America/Chicago",
 		alarms: [{
-			time: "12:00",
-			days: [1, 2, 3, 4, 5],
-            title: "GET UP!!!",
-            message: "Get Your Ass Outta Bed!!!"
+			time: "23:12",
+			days: [1, 2, 3, 4, 5]
 		}],
 		sound: "alarm.mp3",
 		touch: false,
+        popup: true,
 		volume: 1.0,
-		format: "ddd <br> h:mm <br> a",
+		format: "ddd h:mm a",
 		timer: 60 * 1000,
 		fade: false,
 		fadeTimer: 60 * 1000,
@@ -65,6 +82,36 @@ Module.register("MMM-DigitalAlarmClock", {
 	getStyles: function() {
 		return ["MMM-DigitalAlarmClock.css", "font-awesome.css"];
 	},
+	
+    getTemplate() {
+        return 'templates/MMM-AlarmClock.njk';
+    },
+
+    /**
+     * @function getTemplateData
+     * @description Data that gets rendered in the nunjuck template.
+     * @override
+     *
+     * @returns {string} Data for the nunjuck template.
+     */
+    getTemplateData() {
+        let src = this.config.sound;
+
+        if (this.alarmFired && this.next.sound) {
+            src = this.next.sound;
+        }
+
+        if (!src.match(/^https?:\/\//)) {
+            src = this.file(`sounds/${src}`);
+        }
+
+        return {
+            config: this.config,
+            next: this.next,
+            alarmFired: this.alarmFired,
+            src
+        };
+    },
 
 	// Define start sequence.
 	start: function() {
@@ -88,35 +135,51 @@ Module.register("MMM-DigitalAlarmClock", {
 		moment.locale(config.language);
 	},
 
+	notificationReceived(notification) {
+        if (notification === "STOP_ALARM") {
+            this.resetAlarmClock()
+        }
+    },
+
 	checkAlarm() {
-		if (!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0) {
-			const alert = {
-				imageFA: "bell@fa",
-				title: this.next.sender || this.next.title,
-				message: this.next.message
-			};
-			if (!this.config.touch) {
-				alert.timer = this.config.timer;
-			}
-			this.sendNotification("SHOW_ALERT", alert);
-			this.alarmFired = true;
-			this.updateDom(300);
-			this.timer = setTimeout(() => {
-				this.resetAlarmClock();
-			}, this.config.timer);
-			if (this.config.touch) {
-				MM.getModules().enumerate((module) => {
-					if (module.name === "alert") {
-						module.alerts["MMM-DigitalAlarmClock"].ntf.addEventListener("click", () => {
-							clearTimeout(this.timer);
-							clearTimeout(this.fadeInterval);
-							this.resetAlarmClock();
-						});
-					}
-				});
-			}
-		}
-	},
+        if (!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0) {
+            const alert = {
+                imageFA: "bell",
+                title: this.next.sender || this.next.title,
+                message: this.next.message
+            };
+            let timer = this.config.timer;
+            // If the alarm has specific timer and if MM is not touch, we use the alarm timer.
+            if (typeof this.next.timer !== "undefined" && !this.config.touch) {
+                timer = this.next.timer;
+            }
+            if (!this.config.touch) {
+                alert.timer = timer;
+            }
+            if (this.config.popup) {
+                this.sendNotification("SHOW_ALERT", alert);
+            }
+            this.alarmFired = true;
+            this.updateDom();
+            this.timer = setTimeout(() => {
+                this.resetAlarmClock();
+            }, timer);
+            if (this.config.touch && this.config.popup) {
+                MM.getModules().enumerate(module => {
+                    if (module.name === "alert") {
+                        module.alerts["MMM-DigitalAlarmClock"].ntf.addEventListener("click", () => {
+                            this.resetAlarmClock();
+                        });
+                    }
+                });
+            }
+            setTimeout(() => {
+                const player = document.getElementById("MMM-AlarmClock-Player");
+                player.volume = this.config.fade ? 0 : this.config.volume;
+                this.fadeAlarm();
+            }, 100);
+        }
+    },
 
 	fadeAlarm() {
 		let volume = 0;
@@ -145,12 +208,14 @@ Module.register("MMM-DigitalAlarmClock", {
 	},
 
 	resetAlarmClock() {
-		this.alarmFired = false;
-		if (this.config.touch) {
-			this.sendNotification("HIDE_ALERT");
-		}
-		this.setNextAlarm();
-		this.updateDom(300);
+        clearTimeout(this.timer);
+        clearTimeout(this.fadeInterval);
+        this.alarmFired = false;
+        if (this.config.touch && this.config.popup) {
+            this.sendNotification("HIDE_ALERT");
+        }
+        this.setNextAlarm();
+        this.updateDom(300);
 	},
 
 	getMoment(alarm) {
@@ -180,45 +245,34 @@ Module.register("MMM-DigitalAlarmClock", {
 		});
 	},
 
+	button(onclick) {
+		const audio = document.getElementsByTagName("audio");
+		if (!audio.paused) {
+			audio.pause(onclick);
+			audio.currentTime = 0;
+		}
+	},
+
 	getDom: function () {
 
 		const wrapper = document.createElement("div");
 
+		// Date section
 		const dateWrapper = document.createElement("div");
 		dateWrapper.classList.add("xlarge");
-
-		const alarm = document.createElement("td");
-		alarm.className = "alarm";
-		if (!this.next) {
-			alarm.classList.add("fa", "fa-bell-o", "bell");
-		} else {
-			alarm.classList.add("fa", "fa-bell", "bell");
-		}
-		dateWrapper.appendChild(alarm);
 
 		const date = document.createElement("span");
 		const now = moment();
 		date.className = "date";
-		date.classList.add("align-right");
-		date.innerHTML = "&nbsp;&nbsp;" + now.format(this.config.dateFormat);
+		date.innerHTML = now.format(this.config.dateFormat);
 		dateWrapper.appendChild(date);
 
+		// Time section
 		const timeWrapper = document.createElement("div");
 		timeWrapper.classList.add("xlarge");
 
-		const alarmSet = document.createElement("td");
-		alarmSet.className = "set";
-		if (!this.next) {
-			alarmSet.innerHTML = "";
-		} else {
-			alarmSet.classList.add("xlarge");
-			alarmSet.innerHTML = `${this.next.moment.format(this.config.format)}` + "&nbsp;&nbsp;";
-		}
-		timeWrapper.appendChild(alarmSet);
-
 		const time = document.createElement("span");
 		time.className = "time";
-		time.classList.add("align-right");
 		if (this.config.timezone) {
 			now.tz(this.config.timezone);
 		}
@@ -232,8 +286,40 @@ Module.register("MMM-DigitalAlarmClock", {
 		colonSymbol.className = "colon";
 
 		const timeString = now.format(hourSymbol + colonSymbol + "mm");
-		time.innerHTML = "&nbsp;&nbsp;" + timeString;
+		time.innerHTML = timeString;
 		timeWrapper.appendChild(time);
+
+		// Alarm section
+		const alarmWrapper = document.createElement("div");
+		alarmWrapper.classList.add("large");
+
+		const alarm = document.createElement("tr");
+		alarm.className = "alarm";
+
+		if (!this.next) {
+			alarm.classList.add("fa", "fa-bell-slash", "bell");
+		} else {
+			alarm.classList.add("fa", "fa-bell", "bell");
+		}
+		alarmWrapper.appendChild(alarm);
+
+		const alarmSet = document.createElement("span");
+		alarmSet.className = "set";
+		if (!this.next) {
+			alarmSet.innerHTML = "";
+		} else {
+			alarmSet.classList.add("medium");
+			alarmSet.innerHTML = `&nbsp&nbsp${this.next.moment.format(this.config.format)}&nbsp&nbsp`;
+		}
+		alarmWrapper.appendChild(alarmSet);
+
+		const setButton = document.createElement("span");
+		setButton.className = "button";
+		if (!this.next) {
+			setButton.innerHTML = "Alarm NOT Set";
+		} else {
+			setButton.innerHTML = "Alarm Set";
+		}
 
 		if (this.alarmFired) {
 			const sound = document.createElement("audio");
@@ -254,8 +340,9 @@ Module.register("MMM-DigitalAlarmClock", {
 			if (this.config.fade === true) {
 				this.fadeAlarm();
 			}
-			timeWrapper.appendChild(sound);
+			alarmWrapper.appendChild(sound);
 		}
+		alarmWrapper.appendChild(setButton);
 
 		const weekWrapper = document.createElement("div");
 		weekWrapper.className = "week";
@@ -267,6 +354,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		digitalWrapper.className = "digital";
 		digitalWrapper.appendChild(dateWrapper);
 		digitalWrapper.appendChild(timeWrapper);
+		digitalWrapper.appendChild(alarmWrapper);
 		digitalWrapper.appendChild(weekWrapper);
 
 		wrapper.appendChild(digitalWrapper);
