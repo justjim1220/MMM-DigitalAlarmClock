@@ -10,7 +10,7 @@ To use this module, add it to the modules array in the `config/config.js` file:
 ````javascript
 modules: [
 	{
-		module: "MMM-DigitalAlarmClock
+		module: "MMM-DigitalAlarmClock"
 		position: "top_center",	// This can be any of the regions.
 		config: {
 			// The config property is optional.
