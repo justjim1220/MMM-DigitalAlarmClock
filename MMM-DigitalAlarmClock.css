@@ -36,24 +36,6 @@
   }
 }
 
-@-ms-keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  25% {
-	opacity: 0.25;
-  }
-  50% {
-	opacity: 0.5;
-  }
-  75% {
-	opacity: 0.75;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 @-o-keyframes blink {
   0% {
     opacity: 0;
@@ -102,12 +84,6 @@
   }
 }
 
-@-ms-keyframes glow {
-  to {
-    text-shadow: 0 0 50px #0084ff;
-  }
-}
-
 @-o-keyframes glow {
   to {
     text-shadow: 0 0 50px #0084ff;
@@ -121,7 +97,7 @@
 }
 
 .MMM-DigitalAlarmClock {
-  color: #00d960;	/* #0084ff - digital blue, #ff0900 - digital red, #00d960 - digital green, #ffffff - bright white */
+  color: #ff0900;	/* #0084ff - digital blue, #ff0900 - digital red, #00d960 - digital green, #ffffff - bright white */
   width: 800px;
   font-family: DS-Digital;
   position: relative;
@@ -133,22 +109,23 @@
   border: 50px inset #333;
   padding: 0;
   overflow: hidden;
-  align-content: center;
+  align-items: center;
 }
 
 .MMM-DigitalAlarmClock .date {
-  font-size: 75px;
+  font-size: 50px;
+  line-height: 105%;
   font-family: DS-Digital;
   text-align: center;
   letter-spacing: 5px;
   font-weight: 600;
-  padding: 5px 0 0 0;
+  padding-top: 20px;
 }
 
 .MMM-DigitalAlarmClock .time {
   position: relative;
   font-size: 300px;
-  line-height: 300px;
+  line-height: 105%;
   letter-spacing: 5px;
   font-family: DS-Digital;
   font-weight: bolder;
@@ -162,6 +139,7 @@
 
 .MMM-DigitalAlarmClock .week {
   font-size: 75px;
+  line-height: 105%;
   font-family: DS-Digital;
   letter-spacing: 3px;
   font-weight: bold;
@@ -170,29 +148,40 @@
 
 .MMM-DigitalAlarmClock .alarm {
   font-size: 50px;
+  line-height: 105%;
   text-align: left;
   vertical-align: middle;
-  padding: 5px 0 0 5px;
+  padding: 5px 0 0 0;
+}
+
+.MMM-DigitalAlarmClock .onoff {
+  width: 10%;
+  line-height: 105%;
+  vertical-align: middle;
+  padding: 5px 0 0 0;
+  cursor: pointer;
 }
 
 .MMM-DigitalAlarmClock .set {
   position: relative;
   font-size: 50px;
+  line-height: 105%;
   text-align: right;
   vertical-align: middle;
-  padding: 0 0 0 5px;
+  padding: 5px 0 0 5px;
 }
 
 .MMM-DigitalAlarmClock .button {
   display: inline-block;
+  line-height: 105%;
   padding: 5px 10px;
   font-size: 30px;
   text-align: center;
   border: 2px solid;
   border-radius: 12px;
   vertical-align: middle;
-  cursor: pointer;
 }
+
 
 
 /*****************************************************

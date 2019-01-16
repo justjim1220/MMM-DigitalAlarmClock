@@ -1,0 +1,239 @@
+Button Click Function to Play or Pause Audio:
+<button onclick=
+'var a = document.getElementsByTagName("audio")[0];
+if(a.paused)a.play();else a.pause()'>Play/Pause</button>
+<audio src="file:///sdcard/Sora-sound.mp3"
+></audio>
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Image Switch with mouse click:
+var newsrc = "mars.jpg";
+
+function changeImage() {
+  if ( newsrc == "mars.jpg" ) {
+    document.images["pic"].src = "/images/program/js/forms/mars.jpg";
+    document.images["pic"].alt = "Mars";
+    newsrc  = "earth.jpg";
+  }
+  else {
+    document.images["pic"].src = "/images/program/js/forms/earth.jpg";
+    document.images["pic"].alt = "Earth";
+    newsrc  = "mars.jpg";
+  }
+}
+
+********************************************************************************************************
+Windows Alert Message with Image Click:
+function alertImage(n) {
+  if ( n == 0 )
+    alert("You clicked the Welsh flag!");
+  else if ( n == 1 )
+    alert("You clicked the Scottish flag!");
+  else
+    alert("You clicked the English flag!");
+}
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Windows Message to Confirm Action:
+var newsrc = "mars.jpg";
+
+function changeImage() {
+  if ( newsrc == "mars.jpg" && confirm("Are you sure you want to change the image to Mars?") ) {
+    document.images["pic"].src = "/images/program/js/forms/mars.jpg";
+    document.images["pic"].alt = "Mars";
+    newsrc  = "earth.jpg";
+  }
+  else if ( newsrc == "earth.jpg" && confirm("Are you sure you want to change the image to Earth?") ) {
+    document.images["pic"].src = "/images/program/js/forms/earth.jpg";
+    document.images["pic"].alt = "Earth";
+    newsrc  = "mars.jpg";
+  }
+}
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Image Switch with mouse Rollover:
+function changeImage(n) {
+  if ( n == 0 ) {
+    document.images["pic"].src = "/images/program/js/forms/mars.jpg";
+    document.images["pic"].alt = "Mars";
+  }
+  else {
+    document.images["pic"].src = "/images/program/js/forms/earth.jpg";
+    document.images["pic"].alt = "Earth";
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Data Entry Validation:
+function isValid(form) {
+  if ( isEmpty(form.textBox.value) ) {
+    alert("You must enter a value!");
+    form.textBox.focus();
+    form.textBox.select();
+  }  
+  else if ( form.dropSel.selectedIndex == 0 && !isPosInteger(form.textBox.value) ) {
+    alert("You must enter a positive integer!");
+    form.textBox.focus();
+    form.textBox.select();
+  }
+  else if ( form.dropSel.selectedIndex == 1 && !isInteger(form.textBox.value) ) {
+    alert("You must enter an integer!");
+    form.textBox.focus();
+    form.textBox.select();
+  }
+  else if ( form.dropSel.selectedIndex == 2 && !isNumber(form.textBox.value) ) {
+    alert("You must enter a number!");
+    form.textBox.focus();
+    form.textBox.select();
+  }
+  else if ( form.dropSel.selectedIndex == 3 && !isState(form.textBox.value) ) {
+    alert("You must enter a U.S. State (e.g. VT, NC, FL)!");
+    form.textBox.focus();
+    form.textBox.select();
+  }  
+  else if ( form.dropSel.selectedIndex == 4 && (!isPosInteger(form.textBox.value) || form.textBox.value.length != 5) ) {
+    alert("You must enter a five digit U.S. Zip Code!");
+    form.textBox.focus();
+    form.textBox.select();
+  }  
+  else if ( form.dropSel.selectedIndex == 5 && !isAirportId(form.textBox.value) ) {
+    alert("You must enter a four character ICAO airport identifier!");
+    form.textBox.focus();
+    form.textBox.select();
+  }  
+  else {
+    alert("Entry validates as a" + ((form.dropSel.selectedIndex == 1 || form.dropSel.selectedIndex == 5) ? "n " : " ") +
+          form.dropSel.options[form.dropSel.selectedIndex].text.toLowerCase() + "!");
+  }
+}
+
+
+//  Checks to see if 'val' is empty
+
+function isEmpty(val) {
+  if ( val == null || val == "" )
+    return true;
+  else
+    return false;
+}
+
+
+//  Checks to see if 'val' represents a positive integer
+
+function isPosInteger(val) {
+  s = val.toString();
+  for ( var n = 0; n < s.length; n++ ) {
+    if ( s.charAt(n) < "0" || s.charAt(n) > "9" )
+      return false;
+  }
+  return true;
+}
+
+
+//  Checks to see if 'val' represents an integer
+
+function isInteger(val) {
+  s = val.toString();
+  for ( var n = 0; n < s.length; n++ ) {
+    if ( (s.charAt(n) < "0" || s.charAt(n) > "9") && !( n == 0 && s.charAt(n) == "-" ) )
+      return false;
+  }
+  return true;
+}
+
+//  Checks to see if 'val' represents a number
+
+function isNumber(val) {
+  s  = val.toString();
+  dp = false;
+  for ( var n = 0; n < s.length; n++ ) {
+    if ( s.charAt(n) == "." && !dp ) {
+      dp = true;
+      continue;
+    }
+    if ( (s.charAt(n) < "0" || s.charAt(n) > "9") && !( n == 0 && s.charAt(n) == "-" ) )
+      return false;
+  }
+  return true;
+}
+
+
+//  Checks to see if 'val' represents a two-letter U.S. State abbreviation
+
+function isState(val) {
+  s  = val.toString();
+  for ( var n = 0; n < 50; ++n ) {
+    if ( states[n] == s.toUpperCase() )
+      return true;
+  }
+  return false;
+}
+
+
+//  Checks to see if 'val' represents a four character ICAO airport identifier
+
+function isAirportId(val) {
+  s  = val.toString().toUpperCase();
+  if ( s.length != 4 )
+    return false;
+  for ( var n = 0; n < 4; ++n ) {
+    if ( s.charAt(n) < "A" || s.charAt(n) > "Z" )
+      return false;
+  }
+  return true;
+}
+
+
+var states = new Array(50);
+states[0]  = "AK";    //  Alaska
+states[1]  = "AL";    //  Alabama
+states[2]  = "AR";    //  Arkansas
+states[3]  = "AZ";    //  Arizona
+states[4]  = "CA";    //  California
+states[5]  = "CO";    //  Colorado
+states[6]  = "CT";    //  Connecticut
+states[7]  = "DE";    //  Delaware
+states[8]  = "FL";    //  Florida
+states[9]  = "GA";    //  Georgia
+states[10] = "HI";    //  Hawaii
+states[11] = "IA";    //  Iowa
+states[12] = "ID";    //  Idaho
+states[13] = "IL";    //  Illinois
+states[14] = "IN";    //  Indiana
+states[15] = "KS";    //  Kansas
+states[16] = "KY";    //  Kentucky
+states[17] = "LA";    //  Louisiana
+states[18] = "MA";    //  Massachusetts
+states[19] = "MD";    //  Maryland
+states[20] = "ME";    //  Maine
+states[21] = "MI";    //  Michigan
+states[22] = "MN";    //  Minnesota
+states[23] = "MO";    //  Missouri
+states[24] = "MS";    //  Mississippi
+states[25] = "MT";    //  Montana
+states[26] = "NC";    //  North Carolina
+states[27] = "ND";    //  North Dakota
+states[28] = "NE";    //  Nebraska
+states[29] = "NH";    //  New Hampshire
+states[30] = "NJ";    //  New Jersey
+states[31] = "NM";    //  New Mexico
+states[32] = "NV";    //  Nevada
+states[33] = "NY";    //  New York
+states[34] = "OH";    //  Ohio
+states[35] = "OK";    //  Oklahoma
+states[36] = "OR";    //  Oregon
+states[37] = "PA";    //  Pennsylvania
+states[38] = "RI";    //  Rhode Island
+states[39] = "SC";    //  South Carolina
+states[40] = "SD";    //  South Dakota
+states[41] = "TN";    //  Tennessee
+states[42] = "TX";    //  Texas
+states[43] = "UT";    //  Utah
+states[44] = "VA";    //  Virgina
+states[45] = "VT";    //  Vermont
+states[46] = "WA";    //  Washington
+states[47] = "WI";    //  Wisconsin
+states[48] = "WV";    //  West Virgina
+states[49] = "WY";    //  Wyoming
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
