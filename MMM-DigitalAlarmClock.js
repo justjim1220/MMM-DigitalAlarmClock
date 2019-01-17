@@ -38,7 +38,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		showWeek: false,
 		dateFormat: "ddd ll",
 		timezone: "America/Chicago",
-		alarmSet: false,
+		alarmSet: null,
 		alarms: [{
 			time: "09:30",
 			days: [1, 2, 3, 4, 5]
@@ -206,7 +206,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		}
 	},
 
-	getDom: function () {
+	getDom: function() {
 
 		const wrapper = document.createElement("div");
 
@@ -251,6 +251,15 @@ Module.register("MMM-DigitalAlarmClock", {
 
 		const pwrBtn = document.createElement("span");
 		pwrBtn.className = "onoff";
+		pwrBtn.id = "powerBtn";
+		pwrBtn.addEventListener("click", () => {
+			if (this.config.alarmSet !=false) {
+				this.config.alarmSet = true;
+			} else if (this.config.alarmSet !=true) {
+				this.config.alarmSet = false;
+			}
+		});
+
 		if (this.config.alarmSet === true) {
 			pwrBtn.innerHTML = "<img class=image src=./modules/MMM-DigitalAlarmClock/on.png width=10% valign=middle>&nbsp;&nbsp;";
 		} else {
