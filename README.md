@@ -1,9 +1,6 @@
 # Module: MMM-DigitalAlarmClock:
 
-The `clock` module is one of the default modules of the MagicMirror.
-This module is a variation only showing the Digital Clock.
-I made this because I wanted to be able to use the 'clock' module on separate pages of my Mirror.
-This module displays the current date, week, and time. The information will be updated realtime.
+This module is a combination of the digital part of the default MM<sup>2</sup> clock module and @fewieden's MMM-AlarmClock 3<sup>rd</sup> Party module for MM<sup>2</sup>.
 
 ## Installing this module:
 
