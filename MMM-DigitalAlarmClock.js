@@ -249,7 +249,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		const alarm = document.createElement("tr");
 		alarm.className = "alarm";
 
-		const pwrBtn = document.createElement("span");
+		const pwrBtn = document.createElement("img");
 		pwrBtn.className = "onoff";
 		pwrBtn.id = "powerBtn";
 		pwrBtn.addEventListener("click", () => {
