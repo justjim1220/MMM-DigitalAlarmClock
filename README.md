@@ -4,7 +4,7 @@ This module is a combination of the digital part of the default MM<sup>2</sup> c
 
 ## Installing this module:
 
-`$ cd MagicMirror<br>
+$ cd MagicMirror<br>
 $ cd modules<br>
 $ git clone https://github.com/justjim1220/MMM-DigitalAlarmClock.git<br>
 $ cd MMM-DigitalAlarmClock<br>
