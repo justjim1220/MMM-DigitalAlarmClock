@@ -5,13 +5,13 @@
     opacity: 0;
   }
   25% {
-	opacity: 0.25;
+	  opacity: 0.25;
   }
   50% {
-	opacity: 0.5;
+	  opacity: 0.5;
   }
   75% {
-	opacity: 0.75;
+	  opacity: 0.75;
   }
   100% {
     opacity: 1;
@@ -23,13 +23,13 @@
     opacity: 0;
   }
   25% {
-	opacity: 0.25;
+	  opacity: 0.25;
   }
   50% {
-	opacity: 0.5;
+	  opacity: 0.5;
   }
   75% {
-	opacity: 0.75;
+	  opacity: 0.75;
   }
   100% {
     opacity: 1;
@@ -41,13 +41,13 @@
     opacity: 0;
   }
   25% {
-	opacity: 0.25;
+	  opacity: 0.25;
   }
   50% {
-	opacity: 0.5;
+	  opacity: 0.5;
   }
   75% {
-	opacity: 0.75;
+	  opacity: 0.75;
   }
   100% {
     opacity: 1;
@@ -59,13 +59,13 @@
     opacity: 0;
   }
   25% {
-	opacity: 0.25;
+	  opacity: 0.25;
   }
   50% {
-	opacity: 0.5;
+	  opacity: 0.5;
   }
   75% {
-	opacity: 0.75;
+	  opacity: 0.75;
   }
   100% {
     opacity: 1;
@@ -98,22 +98,22 @@
 
 .MMM-DigitalAlarmClock {
   color: #ff0900;	/* #0084ff - digital blue, #ff0900 - digital red, #00d960 - digital green, #ffffff - bright white */
-  width: 800px;
+  width: 400px;
   font-family: DS-Digital;
   position: relative;
-  height: 450px;
+  height: 225px;
   box-shadow: 0px 0px 2px white;
-  margin: 150px auto;
+  margin: 0 auto;
   border-radius: 50px;
   background-color: #101010;
-  border: 50px inset #333;
+  border: 25px inset #333;
   padding: 0;
   overflow: hidden;
   align-items: center;
 }
 
 .MMM-DigitalAlarmClock .date {
-  font-size: 50px;
+  font-size: 25px;
   line-height: 105%;
   font-family: DS-Digital;
   text-align: center;
@@ -124,7 +124,7 @@
 
 .MMM-DigitalAlarmClock .time {
   position: relative;
-  font-size: 300px;
+  font-size: 150px;
   line-height: 105%;
   letter-spacing: 5px;
   font-family: DS-Digital;
@@ -138,7 +138,7 @@
 }
 
 .MMM-DigitalAlarmClock .week {
-  font-size: 75px;
+  font-size: 37.5px;
   line-height: 105%;
   font-family: DS-Digital;
   letter-spacing: 3px;
@@ -147,7 +147,7 @@
 }
 
 .MMM-DigitalAlarmClock .alarm {
-  font-size: 50px;
+  font-size: 25px;
   line-height: 105%;
   text-align: left;
   vertical-align: middle;
@@ -155,7 +155,7 @@
 }
 
 .MMM-DigitalAlarmClock .onoff {
-  width: 10%;
+  width: 2%;
   line-height: 105%;
   vertical-align: middle;
   padding: 5px 0 0 0;
@@ -164,7 +164,7 @@
 
 .MMM-DigitalAlarmClock .set {
   position: relative;
-  font-size: 50px;
+  font-size: 25px;
   line-height: 105%;
   text-align: right;
   vertical-align: middle;
@@ -175,105 +175,9 @@
   display: inline-block;
   line-height: 105%;
   padding: 5px 10px;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
   border: 2px solid;
   border-radius: 12px;
   vertical-align: middle;
 }
-
-
-
-/*****************************************************
-
-
-.AlarmInput {
-	display: none;
-}
-
-.AlarmInput input {
-  height: 100px;
-  font-size: 100px;
-  max-width: 400px;
-  font-family: 'Orbitron', sans-serif;
-  background-color: #1b252a;
-  border: none;
-  padding: 5px 20px;
-  color: azure;
-  letter-spacing: 5px;
-  position: relative;
-}
-
-.container{
-    width: 90%;
-    max-width: 1400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    display: flex;
-    justify-content: center;
-}
-
-.ClockHolder{
-    width: 500px;
-    background-color: #1b252a;
-    padding: 30px 50px;
-    border-radius: 15px;
-    border: 3px solid #0277BD;
-    position: relative;
-}
-
-.ClockHolder::after{
-    content: " ";
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    width: 70%;
-    height: 15px;
-    background-color: #0277bd;
-    transform: translate(-50%,0);
-    border-radius: 3px 3px 8px 8px;
-}
-
-
-.ClockHolder::before {
-	content: "";
-	position: absolute;
-	width: 110%;
-	height: 10px;
-	background-color: #000077;
-	bottom: -25px;
-	left: -5%;
-	border-radius: 100%;
-	filter: blur(5px);
-}
-
-.AlarmInput input:focus {
-	border: 1px solid #fff;
-}
-
-.Alarm .AlarmInput {
-	display: block;
-}
-
-.Alarm .AlarmInput.DisNone {
-	display: none;
-}
-
-.AlarmInput input::-webkit-input-placeholder {
-	font-size: 30px;
-}
-
-.AlarmInput input::-moz-placeholder {
-	font-size: 30px;
-}
-
-.AlarmInput input:-ms-input-placeholder {
-	font-size: 30px;
-}
-
-.AlarmInput input:-moz-placeholder {
-	font-size: 30px;
-}
-*/

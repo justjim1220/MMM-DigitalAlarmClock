@@ -26,6 +26,8 @@
  * and a lot of Cheyenne Extreme Menthol cigars!!!
  */
 
+// jshint esversion:6
+
 Module.register("MMM-DigitalAlarmClock", {
 	next: null,
 	alarmFired: false,
@@ -206,7 +208,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		}
 	},
 
-	getDom: function() {
+	getDom: function () {
 
 		const wrapper = document.createElement("div");
 
@@ -249,17 +251,8 @@ Module.register("MMM-DigitalAlarmClock", {
 		const alarm = document.createElement("tr");
 		alarm.className = "alarm";
 
-		const pwrBtn = document.createElement("img");
+		const pwrBtn = document.createElement("span");
 		pwrBtn.className = "onoff";
-		pwrBtn.id = "powerBtn";
-		pwrBtn.addEventListener("click", () => {
-			if (this.config.alarmSet !=false) {
-				this.config.alarmSet = true;
-			} else if (this.config.alarmSet !=true) {
-				this.config.alarmSet = false;
-			}
-		});
-
 		if (this.config.alarmSet === true) {
 			pwrBtn.innerHTML = "<img class=image src=./modules/MMM-DigitalAlarmClock/on.png width=10% valign=middle>&nbsp;&nbsp;";
 		} else {
