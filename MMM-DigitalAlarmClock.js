@@ -74,7 +74,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		Log.info("Starting module: " + this.name);
 
 		// Schedule update interval.
-		const self = this;
+		var self = this;
 		setInterval(function() {
 			self.updateDom();
 		}, 1000);
@@ -98,7 +98,7 @@ Module.register("MMM-DigitalAlarmClock", {
 
 	checkAlarm() {
 		if (!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0) {
-			const alert = {
+			var alert = {
 				imageFA: "bell-o@fa",
 				title: this.next.sender || this.next.title,
 				message: this.next.message
@@ -129,7 +129,7 @@ Module.register("MMM-DigitalAlarmClock", {
 				});
 			}
 			setTimeout(() => {
-				const player = document.getElementById("MMM-AlarmClock-Player");
+				var player = document.getElementById("MMM-AlarmClock-Player");
 				player.volume = this.config.fade ? 0 : this.config.volume;
 				this.fadeAlarm();
 			}, 100);
@@ -140,7 +140,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		let volume = 0;
 		let counter = 0;
 		this.fadeInterval = setInterval(() => {
-			const player = document.getElementById("MMM-DigitalAlarmClock-Player");
+			var player = document.getElementById("MMM-DigitalAlarmClock-Player");
 			player.volume = volume;
 			volume += this.config.fadeStep;
 			counter += 1000;
@@ -154,7 +154,7 @@ Module.register("MMM-DigitalAlarmClock", {
 	setNextAlarm() {
 		this.next = null;
 		for (let i = 0; i < this.config.alarms.length; i += 1) {
-			const temp = this.getMoment(this.config.alarms[i]);
+			var temp = this.getMoment(this.config.alarms[i]);
 			if (!this.next || temp.diff(this.next.moment) < 0) {
 				this.next = this.config.alarms[i];
 				this.next.moment = temp;
@@ -174,10 +174,10 @@ Module.register("MMM-DigitalAlarmClock", {
 	},
 
 	getMoment(alarm) {
-		const now = moment();
+		var now = moment();
 		let difference = Math.min();
-		const hour = parseInt(alarm.time.split(":")[0]);
-		const minute = parseInt(alarm.time.split(":")[1]);
+		var hour = parseInt(alarm.time.split(":")[0]);
+		var minute = parseInt(alarm.time.split(":")[1]);
 
 		for (let i = 0; i < alarm.days.length; i += 1) {
 			if (now.day() < alarm.days[i]) {
@@ -201,7 +201,7 @@ Module.register("MMM-DigitalAlarmClock", {
 	},
 
 	button(onclick) {
-		const audio = document.getElementsByTagName("audio");
+		var audio = document.getElementsByTagName("audio");
 		if (!audio.paused) {
 			audio.pause(onclick);
 			audio.currentTime = 0;
@@ -210,55 +210,59 @@ Module.register("MMM-DigitalAlarmClock", {
 
 	getDom: function () {
 
-		const wrapper = document.createElement("div");
+		var wrapper = document.createElement("div");
 
 		// Date section
-		const dateWrapper = document.createElement("div");
+		var dateWrapper = document.createElement("div");
 		dateWrapper.classList.add("medium");
 
-		const date = document.createElement("span");
-		const now = moment();
+		var date = document.createElement("span");
+		var  now = moment();
 		date.className = "date";
 		date.innerHTML = now.format(this.config.dateFormat);
 		dateWrapper.appendChild(date);
 
 		// Time section
-		const timeWrapper = document.createElement("div");
+		var timeWrapper = document.createElement("div");
 		timeWrapper.classList.add("large");
 
-		const time = document.createElement("span");
+		var time = document.createElement("span");
 		time.className = "time";
 		if (this.config.timezone) {
 			now.tz(this.config.timezone);
 		}
 
-		const hourSymbol = "HH";
+		var hourSymbol = "HH";
 		if (this.config.timeFormat !== 24) {
 			hourSymbol = "h";
 		}
 
-		const colonSymbol = ":";
+		var colonSymbol = ":";
 		colonSymbol.className = "colon";
 
-		const timeString = now.format(hourSymbol + colonSymbol + "mm");
+		var timeString = now.format(hourSymbol + colonSymbol + "mm");
 		time.innerHTML = timeString;
 		timeWrapper.appendChild(time);
 
 		// Alarm section
-		const alarmWrapper = document.createElement("div");
+		var alarmWrapper = document.createElement("div");
 		alarmWrapper.classList.add("large");
 
-		const alarm = document.createElement("tr");
+		var alarm = document.createElement("tr");
 		alarm.className = "alarm";
 
-		const pwrBtn = document.createElement("span");
+		var pwrBtn = document.createElement("span");
 		pwrBtn.className = "onoff";
 		if (this.config.alarmSet === true) {
 			pwrBtn.innerHTML = "<img class=image src=./modules/MMM-DigitalAlarmClock/on.png width=10% valign=middle>&nbsp;&nbsp;";
 		} else {
 			pwrBtn.innerHTML = "<img class=image src=./modules/MMM-DigitalAlarmClock/off.png width=10% valign=middle>&nbsp;&nbsp;";
 		}
-		alarmWrapper.appendChild(pwrBtn);
+	pwrBtn.addEventListener("click", () => { 		
+			Log.log("in event handler for click");
+  })
+
+alarmWrapper.appendChild(pwrBtn);
 
 		if (this.config.alarmSet === true) {
 			alarm.classList.add("fa", "fa-bell-o", "bell");
@@ -267,7 +271,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		}
 		alarmWrapper.appendChild(alarm);
 
-		const alarmSet = document.createElement("span");
+		var alarmSet = document.createElement("span");
 		alarmSet.className = "set";
 		if (this.config.alarmSet === true) {
 			alarmSet.classList.add("medium");
@@ -277,8 +281,8 @@ Module.register("MMM-DigitalAlarmClock", {
 		}
 		alarmWrapper.appendChild(alarmSet);
 
-		const setButton = document.createElement("span");
-		setButton.className = "button";
+		var setButton = document.createElement("button");
+		//setButton.className = "button";
 		if (this.config.alarmSet === true) {
 			setButton.innerHTML = "Alarm Set";
 		} else {
@@ -287,7 +291,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		alarmWrapper.appendChild(setButton);
 
 		if (this.alarmFired) {
-			const sound = document.createElement("audio");
+			var sound = document.createElement("audio");
 			sound.className = "alarmSound";
 			let srcSound = this.config.sound;
 			if (this.next.sound) {
@@ -308,7 +312,7 @@ Module.register("MMM-DigitalAlarmClock", {
 			alarmWrapper.appendChild(sound);
 		}
 
-		const weekWrapper = document.createElement("div");
+		var weekWrapper = document.createElement("div");
 		weekWrapper.className = "week";
 		if (this.config.showWeek) {
 			weekWrapper.innerHTML = this.translate("WEEK", { weekNumber: now.week() });
@@ -327,4 +331,3 @@ Module.register("MMM-DigitalAlarmClock", {
 	}
 });
 
-console.log(this.module);
