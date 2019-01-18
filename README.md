@@ -62,7 +62,7 @@ The following properties can be configured:
 | `title`           | (optional) add a reason for the alarm
 | `message`         | (optional) add a message to the alert
 
- alarms: [
+ `alarms: [
 	{
 		time: "0600",
 		days: [0, 5, 6], // Sun, Fri, Sat
@@ -80,7 +80,7 @@ The following properties can be configured:
 		... // CAN ADD AS MANY DIFFERENT ALARMS AS YOU NEED
 	}
  ],
-
+`
 ==================================================================================
 
 ## Acknowledgements:
