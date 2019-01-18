@@ -86,6 +86,6 @@ The following properties can be configured:
 
 ## Acknowledgements:
 
-@MichMich for the default clock module from which this was started
-@fewieden for his MMM-AlarmClock module from which was added to the default clock module
-@wesdsturdevant for his help with some of the code issues I ran into a few times
+@MichMich for the default clock module from which this was started<br>
+@fewieden for his MMM-AlarmClock module from which was added to the default clock module<br>
+@wesdsturdevant for his help with some of the code issues I ran into a few times<br>
