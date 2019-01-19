@@ -2,6 +2,11 @@
 
 This module is a combination of the digital part of the default MM<sup>2</sup> clock module and @fewieden's MMM-AlarmClock 3<sup>rd</sup> Party module for MM<sup>2</sup>.
 
+## Screenshots
+
+![ScreenShot for Alarm Set](https://github.com/justjim1220/MMM-DigitalAlarmClock/blob/master/Screenshot%20(1).png)
+![ScreenShot for Alarm Not Set](https://github.com/justjim1220/MMM-DigitalAlarmClock/blob/master/Screenshot%20(2).png)
+
 ## Installing this module:
 
 $ cd MagicMirror<br>
