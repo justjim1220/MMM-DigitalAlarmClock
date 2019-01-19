@@ -251,15 +251,30 @@ Module.register("MMM-DigitalAlarmClock", {
 		var alarm = document.createElement("tr");
 		alarm.className = "alarm";
 
-		var pwrBtn = document.createElement("span");
-		pwrBtn.className = "onoff";
+		var pwrBtn = document.createElement("button");
+		//pwrBtn.className = "onoff";
+		var	BtnImg=document.createElement("img")
+			BtnImg.width="25";
+			//BtnImg.style.valign="middle";
+			BtnImg.id="onoff";
+
 		if (this.config.alarmSet === true) {
-			pwrBtn.innerHTML = "<img class=image src=./modules/MMM-DigitalAlarmClock/on.png width=10% valign=middle>&nbsp;&nbsp;";
+			BtnImg.src = "modules/"+this.name+"/on.png";
 		} else {
-			pwrBtn.innerHTML = "<img class=image src=./modules/MMM-DigitalAlarmClock/off.png width=10% valign=middle>&nbsp;&nbsp;";
-		}
-	pwrBtn.addEventListener("click", () => { 		
+			BtnImg.src = "modules/"+this.name+"/off.png";
+	  }
+		pwrBtn.appendChild(BtnImg);
+	pwrBtn.addEventListener("click", (button) => { 		
 			Log.log("in event handler for click");
+			var b=document.getElementById("onoff")
+			if(b.src.indexOf("on.png")>0){
+					b.src = "modules/"+this.name+"/off.png";					
+					this.config.alarmSet = false;
+			}
+			else {
+				  b.src = "modules/"+this.name+"/on.png";					
+					this.config.alarmSet = true
+			}	
   })
 
 alarmWrapper.appendChild(pwrBtn);
