@@ -1,181 +1,127 @@
 @import url(//db.onlinewebfonts.com/c/1467e2d37ec60cc50117a8db7c24f626?family=DS-Digital);
 
 @-webkit-keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  25% {
-	  opacity: 0.25;
-  }
-  50% {
-	  opacity: 0.5;
-  }
-  75% {
-	  opacity: 0.75;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  25% { opacity: 0.25; }
+  50% { opacity: 0.5; }
+  75% { opacity: 0.75; }
+  100% { opacity: 1; }
 }
 
 @-moz-keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  25% {
-	  opacity: 0.25;
-  }
-  50% {
-	  opacity: 0.5;
-  }
-  75% {
-	  opacity: 0.75;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  25% { opacity: 0.25; }
+  50% { opacity: 0.5; }
+  75% { opacity: 0.75; }
+  100% { opacity: 1; }
 }
 
 @-o-keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  25% {
-	  opacity: 0.25;
-  }
-  50% {
-	  opacity: 0.5;
-  }
-  75% {
-	  opacity: 0.75;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  25% { opacity: 0.25; }
+  50% { opacity: 0.5; }
+  75% { opacity: 0.75; }
+  100% { opacity: 1; }
 }
 
 @keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  25% {
-	  opacity: 0.25;
-  }
-  50% {
-	  opacity: 0.5;
-  }
-  75% {
-	  opacity: 0.75;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  25% { opacity: 0.25; }
+  50% { opacity: 0.5; }
+  75% { opacity: 0.75; }
+  100% { opacity: 1; }
 }
 
 @-webkit-keyframes glow {
-  to {
-    text-shadow: 0 0 50px #0084ff;
-  }
+  to { text-shadow: 0 0 50px #0084ff; }
 }
 
 @-moz-keyframes glow {
-  to {
-    text-shadow: 0 0 50px #0084ff;
-  }
+  to { text-shadow: 0 0 50px #0084ff; }
 }
 
 @-o-keyframes glow {
-  to {
-    text-shadow: 0 0 50px #0084ff;
-  }
+  to { text-shadow: 0 0 50px #0084ff; }
 }
 
 @keyframes glow {
-  to {
-    text-shadow: 0 0 50px #0084ff;
-  }
+  to { text-shadow: 0 0 50px #0084ff; }
 }
 
 .MMM-DigitalAlarmClock {
   color: #ff0900;	/* #0084ff - digital blue, #ff0900 - digital red, #00d960 - digital green, #ffffff - bright white */
-  width: 400px;
+  width: 800px;
   font-family: DS-Digital;
   position: relative;
-  height: 225px;
+  height: 450px;
   box-shadow: 0px 0px 2px white;
-  margin: 0 auto;
+  margin: 150px auto;
   border-radius: 50px;
   background-color: #101010;
-  border: 25px inset #333;
+  border: 50px inset #333;
   padding: 0;
   overflow: hidden;
   align-items: center;
 }
 
 .MMM-DigitalAlarmClock .date {
-  font-size: 25px;
+  font-size: 50px;
   line-height: 105%;
   font-family: DS-Digital;
   text-align: center;
   letter-spacing: 5px;
   font-weight: 600;
-  padding-top: 20px;
 }
 
 .MMM-DigitalAlarmClock .time {
   position: relative;
-  font-size: 150px;
+  font-size: 300px;
   line-height: 105%;
   letter-spacing: 5px;
   font-family: DS-Digital;
   font-weight: bolder;
   text-align: center;
-  padding: 5px 0 0 0;
 }
 
-.colon {
-  animation: glow .5s infinite alternate;
+.MMM-DigitalAlarmClock .colon {
+  animation: glow 1s infinite alternate;
 }
 
 .MMM-DigitalAlarmClock .week {
-  font-size: 37.5px;
+  font-size: 75px;
   line-height: 105%;
   font-family: DS-Digital;
   letter-spacing: 3px;
   font-weight: bold;
-  padding: 5px 0 0 0;
 }
 
 .MMM-DigitalAlarmClock .alarm {
-  font-size: 25px;
+  font-size: 50px;
   line-height: 105%;
   text-align: left;
   vertical-align: middle;
-  padding: 5px 0 0 0;
 }
 
 .MMM-DigitalAlarmClock .onoff {
-  width: 2%;
+  width: 10%;
   line-height: 105%;
   vertical-align: middle;
-  padding: 5px 0 0 0;
   cursor: pointer;
 }
 
 .MMM-DigitalAlarmClock .set {
   position: relative;
-  font-size: 25px;
+  font-size: 50px;
   line-height: 105%;
   text-align: right;
   vertical-align: middle;
-  padding: 5px 0 0 5px;
 }
 
 .MMM-DigitalAlarmClock .button {
   display: inline-block;
   line-height: 105%;
   padding: 5px 10px;
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
   border: 2px solid;
   border-radius: 12px;
