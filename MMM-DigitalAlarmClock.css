@@ -76,7 +76,7 @@
 .MMM-DigitalAlarmClock .time {
   position: relative;
   font-size: 150px;
-  line-height: 105%;
+  line-height: 85%;
   letter-spacing: 5px;
   font-family: DS-Digital;
   font-weight: bolder;
@@ -103,8 +103,10 @@
 }
 
 .MMM-DigitalAlarmClock .onoff {
-  width: 2%;
+  width: 20%;
   line-height: 105%;
+  background: none;
+  border: none;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -122,6 +124,7 @@
   line-height: 105%;
   padding: 5px 10px;
   font-size: 20px;
+  background: none;
   text-align: center;
   border: 2px solid;
   border-radius: 12px;

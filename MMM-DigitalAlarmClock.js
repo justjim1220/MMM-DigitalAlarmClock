@@ -252,11 +252,12 @@ Module.register("MMM-DigitalAlarmClock", {
 		alarm.className = "alarm";
 
 		var pwrBtn = document.createElement("button");
-		//pwrBtn.className = "onoff";
+		pwrBtn.className = "onoff";
 		var	BtnImg=document.createElement("img");
-			BtnImg.width="25";
-			//BtnImg.style.valign="middle";
-			BtnImg.id="onoff";
+		BtnImg.width="40";
+		//BtnImg.style.valign="middle";
+		BtnImg.id="onoff";
+
 		if (this.config.alarmSet === true) {
 			BtnImg.src = "modules/" + this.name + "/on.png";
 		} else {
