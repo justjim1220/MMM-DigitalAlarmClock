@@ -90,3 +90,4 @@ The following properties can be configured:
 @MichMich for the default clock module from which this was started<br>
 @fewieden for his MMM-AlarmClock module from which was added to the default clock module<br>
 @wesdsturdevant for his help with some of the code issues I ran into a few times<br>
+@sdetwiel as always, for his help and input<br>
