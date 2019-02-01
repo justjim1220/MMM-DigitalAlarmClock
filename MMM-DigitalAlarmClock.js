@@ -35,11 +35,8 @@ Module.register("MMM-DigitalAlarmClock", {
 	fadeInterval: null,
 
 	defaults: {
-		timeFormat: config.timeFormat,
 		showDate: true,
-		showWeek: false,
 		dateFormat: "ddd ll",
-		timezone: "America/Chicago",
 		alarmSet: null,
 		alarms: [{
 			time: "09:30",
@@ -49,7 +46,6 @@ Module.register("MMM-DigitalAlarmClock", {
 		touch: false,
 		popup: true,
 		volume: 1.0,
-		format: "ddd h:mm a",
 		timer: 60 * 1000,
 		fade: false,
 		fadeTimer: 60 * 1000,
@@ -228,9 +224,6 @@ Module.register("MMM-DigitalAlarmClock", {
 
 		var time = document.createElement("span");
 		time.className = "time";
-		if (this.config.timezone) {
-			now.tz(this.config.timezone);
-		}
 
 		var hourSymbol = "HH";
 		if (this.config.timeFormat !== 24) {
@@ -327,18 +320,11 @@ Module.register("MMM-DigitalAlarmClock", {
 			alarmWrapper.appendChild(sound);
 		}
 
-		var weekWrapper = document.createElement("div");
-		weekWrapper.className = "week";
-		if (this.config.showWeek) {
-			weekWrapper.innerHTML = this.translate("WEEK", { weekNumber: now.week() });
-		}
-
 		digitalWrapper = document.createElement("div");
 		digitalWrapper.className = "digital";
 		digitalWrapper.appendChild(dateWrapper);
 		digitalWrapper.appendChild(timeWrapper);
 		digitalWrapper.appendChild(alarmWrapper);
-		digitalWrapper.appendChild(weekWrapper);
 
 		wrapper.appendChild(digitalWrapper);
 
