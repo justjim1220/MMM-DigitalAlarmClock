@@ -69,6 +69,11 @@ Module.register("MMM-DigitalAlarmClock", {
 	start: function() {
 		Log.info("Starting module: " + this.name);
 
+		"use strict",
+
+		// Set locale.
+		moment.locale(config.language);
+		
 		// Schedule update interval.
 		var self = this;
 		setInterval(function() {
@@ -79,11 +84,6 @@ Module.register("MMM-DigitalAlarmClock", {
 		setInterval(() => {
 			this.checkAlarm();
 		}, 1000);
-
-		"use strict",
-
-		// Set locale.
-		moment.locale(config.language);
 	},
 
 	notificationReceived(notification) {
