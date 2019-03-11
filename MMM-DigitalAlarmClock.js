@@ -123,7 +123,7 @@ Module.register("MMM-DigitalAlarmClock", {
 			if (this.config.touch && this.config.popup) {
 				MM.getModules().enumerate(module => {
 					if (module.name === "alert") {
-						if (this.config.snooze || this.next.snooze) {
+						if (this.config.snooze && this.next.snooze !== false || this.next.snooze) {
 							module.alerts["MMM-DigitalAlarmClock"].ntf.addEventListener("click", () => {
 								this.snoozeAlarmClock();
 							});
