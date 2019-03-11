@@ -36,6 +36,7 @@ modules: [
 			],
 			sound: "alarm.mp3", // default sound if not set within the alarms section
 			touch: false,
+			snooze: false,
 			popup: true,
 		}
 	},
@@ -57,11 +58,17 @@ The following properties can be configured:
 | `timezone`        | Specific a timezone to show clock. <br><br> **Possible examples values:** `America/New_York`, `America/Santiago`, `Etc/GMT+10` <br> **Default value:** `"America/Chicago"` (central time US). See more informations about configuration value [here](https://momentjs.com/timezone/docs/#/data-formats/packed-format/).
 | `touch`           | for touch screen, touch alert message box to turn off the alarm. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
 | `popup`           | to show the alert message box on the screen, click to turn off the alarm. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `true`
+| `snooze`	    | Turn on of off the snooze function in combination with touch and popup turned on, click to snooze, double click or power button cycle to turn off. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
+| `snoozeTimer`	    | To define the amount of snoozeTimeUnit to snooze. <br><br> **Possible values:** `int` <br> **Default value:** `5`
+| `snoozeTimerUnit` | To define the snoozeTimerUnit. <br><br> **Possible values:** `minutes`, `seconds` or `hours` <br> **Default value:** `"minutes"`
 | ----------------- | -----------
 | `alarms`          | must be inside [{}], can set as many as needed. See below for example.
 | `time`            | must be set in 24hr time. Time shown in module will be how you have it set in your config.js file.
 | `days`            | are nubered starting with Sunday = 0 through Saturday = 6.
 | `sound`           | can set a different sound for different alarms. See sounds folder for choices, may add your own.
+| `snooze`	    | (optional) overrides the default snooze setting
+| `snoozeTimer`	    | (optional) overrides the default snoozeTimer setting
+| `snoozeTimerUnit` | (optional) overrides the default snoozeTimerUnit setting
 | `title`           | (optional) add a reason for the alarm
 | `message`         | (optional) add a message to the alert
 
@@ -71,6 +78,7 @@ The following properties can be configured:
 		time: "0600",
 		days: [0, 5, 6], // Sun, Fri, Sat
 		title: "Weekend - Work",
+		snooze: true,
 		message: "Get Up and Go To Work!",
 		sound: alarm.mp3
 	},
