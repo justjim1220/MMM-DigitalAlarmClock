@@ -47,6 +47,7 @@ Module.register("MMM-DigitalAlarmClock", {
 		popup: true,
 		volume: 1.0,
 		timer: 60 * 1000,
+		format: "ddd h:mm a",
 		fade: false,
 		fadeTimer: 60 * 1000,
 		fadeStep: 0.005,
